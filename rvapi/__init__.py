@@ -18,6 +18,18 @@ def Graph(*args, **kwargs):
     return Graph(*args, **kwargs)
 
 
+def GraphData(*args, **kwargs):
+    """A `GraphData <rvapi.graph.GraphData>` class"""
+    from rvapi.graph import GraphData
+    return GraphData(*args, **kwargs)
+
+
+def GraphDataset(*args, **kwargs):
+    """A `GraphDataset <rvapi.graph.GraphDataset>` class"""
+    from rvapi.graph import GraphDataset
+    return GraphDataset(*args, **kwargs)
+
+
 def Radar(*args, **kwargs):
     """A `Radar <rvapi.radar.Radar>` class"""
     from rvapi.radar import Radar
