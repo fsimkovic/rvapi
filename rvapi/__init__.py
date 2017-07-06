@@ -1,4 +1,3 @@
-
 # MIT License
 # 
 # Copyright (c) 2017 Felix Simkovic
@@ -21,9 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-__author__ = “Felix Simkovic”
-__date__ = “06 Jul 2017”
-__version__ = “0.0dev1”
+__author__ = "Felix Simkovic"
+__date__ = "06 Jul 2017"
+__version__ = "0.0dev1"
 
 def Data(*args, **kwargs):
     """A `Data <rvapi.data.Data>` class"""

@@ -1,4 +1,3 @@
-
 # MIT License
 # 
 # Copyright (c) 2017 Felix Simkovic
@@ -21,8 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-__author__ = “Felix Simkovic”
-__date__ = “06 Jul 2017”
+__author__ = "Felix Simkovic"
+__date__ = "06 Jul 2017"
 
 import pyrvapi
 
