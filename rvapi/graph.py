@@ -56,28 +56,28 @@ class GraphDataset(Entity):
         pyrvapi.rvapi_add_graph_dataset1(self._identifier, self._title, self._description)
 
     @rvapi_flush
-    def add_int(self, i):
-        """Add an integer value to the graph
+    def add(self, value):
+        """Add a value to the graph
 
         Parameters
         ----------
-        i : int
+        value : int, float
            The value to add
 
         """
-        pyrvapi.rvapi_add_graph_int1(self._identifier, i)
+        if isinstance(value, int):
+            pyrvapi.rvapi_add_graph_int1(self._identifier, value)
+        else:
+            pyrvapi.rvapi_add_graph_real1(self._identifier, value, "%g")
 
-    @rvapi_flush
-    def add_real(self, i, f="%g"):
-        """Add a real value to the graph
 
-        Parameters
-        ----------
-        i : float
-           The value to add
-        f : string, optional
-           The string formatter to use
+class GraphPlot(Entity):
 
-        """
-        pyrvapi.rvapi_add_graph_real1(self._identifier, i, f)
+    def __init__(self, parent, title, xlabel=None, ylabel=None):
+        self._identifier = parent._identifier + "/" + self.unique_id("graphPlot")
+        super(GraphPlot, self).__init__(parent)
+        self._title = title
+        self._xlabel = xlabel
+        self._ylabel = ylabel
+        pyrvapi.rvapi_add_graph_plot1(self._identifier, self._title, self._xlabel, self._ylabel)
 

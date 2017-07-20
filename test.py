@@ -59,13 +59,13 @@ for i, section in enumerate(tree):
 # Adding a radar figure
 from rvapi import Radar
 tab2 = Tab(main, "Figure Tab")
-radar = Radar(tab2, "What's the best?", opened=True)
+radar = Radar(tab2, "What's the best?", opened=False)
 radar.add_property("Option 1", 0.1)
 radar.add_property("Option 2", 0.2)
 radar.add_property("Option 3", 1.0)
 
 # Adding a plot figure
-from rvapi import Graph, GraphData, GraphDataset
+from rvapi import Graph, GraphData, GraphDataset, GraphPlot
 graph = Graph(tab2)
 graph_data = GraphData(graph, "Trigonometry")
 dataset1 = GraphDataset(graph_data, "x", "argument")
@@ -74,7 +74,15 @@ dataset3 = GraphDataset(graph_data, "cos(x)", "Cosine")
 # Add some data to the plot
 from math import sin, cos
 for i in range(1, 21):
-    dataset1.add_int(i)
-    dataset2.add_real(sin(i*6.28/19.0))
-    dataset3.add_real(cos(i*6.28/19.0))
+    dataset1.add(i)
+    dataset2.add(sin(i*6.28/19.0))
+    dataset3.add(cos(i*6.28/19.0))
+# Add the plot
+gplot = GraphPlot(graph, "Test", "X-label here", "y-label here")
+from pyrvapi import *
+rvapi_add_plot_line1(
+    graph_data.identifier + "/" + gplot.identifier.rsplit("/")[-1], 
+    dataset1.identifier.rsplit("/")[-1], 
+    dataset2.identifier.rsplit("/")[-1]
+)
 
