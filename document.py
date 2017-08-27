@@ -31,7 +31,7 @@ from .entity import Entity
 
 
 class GuiDocument(Entity):
-    
+
     CCP4_ENV = os.environ["CCP4"]
     SHARE_JSRVIEW = os.path.join(CCP4_ENV, "share", "jsrview")
 
