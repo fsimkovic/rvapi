@@ -24,68 +24,75 @@ __author__ = "Felix Simkovic"
 __date__ = "06 Jul 2017"
 __version__ = "0.0dev1"
 
+
 def Data(*args, **kwargs):
-    """A :obj:`Data <rvapi.data.Data>` class"""
-    from rvapi.data import Data
+    """A :obj:`Data <.data.Data>` class"""
+    from .data import Data
     return Data(*args, **kwargs)
 
 
-def Document(*args, **kwargs):
-    """A :obj:`Document <rvapi.document.Document` class"""
-    from rvapi.document import Document
-    return Document(*args, **kwargs)
+def GuiDocument(*args, **kwargs):
+    """A :obj:`GuiDocument <.document.GuiDocument>` class"""
+    from .document import GuiDocument
+    return GuiDocument(*args, **kwargs)
+
+
+def MockDocument(*args, **kwargs):
+    """A :obj:`MockDocument <.document.MockDocument>` class"""
+    from .document import MockDocument
+    return MockDocument(*args, **kwargs)
 
 
 def Graph(*args, **kwargs):
-    """A :obj:`Graph <rvapi.graph.Graph>` class"""
-    from rvapi.graph import Graph
+    """A :obj:`Graph <.graph.Graph>` class"""
+    from .graph import Graph
     return Graph(*args, **kwargs)
 
 
 def GraphData(*args, **kwargs):
-    """A :obj:`GraphData <rvapi.graph.GraphData>` class"""
-    from rvapi.graph import GraphData
+    """A :obj:`GraphData <.graph.GraphData>` class"""
+    from .graph import GraphData
     return GraphData(*args, **kwargs)
 
 
 def GraphDataset(*args, **kwargs):
-    """A :obj:`GraphDataset <rvapi.graph.GraphDataset>` class"""
-    from rvapi.graph import GraphDataset
+    """A :obj:`GraphDataset <.graph.GraphDataset>` class"""
+    from .graph import GraphDataset
     return GraphDataset(*args, **kwargs)
 
 
 def GraphPlot(*args, **kwargs):
-    """A :obj:`GraphPlot <rvapi.graph.GraphPlot>` class"""
-    from rvapi.graph import GraphPlot
+    """A :obj:`GraphPlot <.graph.GraphPlot>` class"""
+    from .graph import GraphPlot
     return GraphPlot(*args, **kwargs)
 
 
 def Radar(*args, **kwargs):
-    """A :obj:`Radar <rvapi.radar.Radar>` class"""
-    from rvapi.radar import Radar
+    """A :obj:`Radar <.radar.Radar>` class"""
+    from .radar import Radar
     return Radar(*args, **kwargs)
 
 
 def Section(*args, **kwargs):
-    """A :obj:`Section <rvapi.section.Section>` class"""
-    from rvapi.section import Section
+    """A :obj:`Section <.section.Section>` class"""
+    from .section import Section
     return Section(*args, **kwargs)
 
 
 def Tab(*args, **kwargs):
-    """A :obj:`Tab <rvapi.tab.Tab>` class"""
-    from rvapi.tab import Tab
+    """A :obj:`Tab <.tab.Tab>` class"""
+    from .tab import Tab
     return Tab(*args, **kwargs)
 
 
 def Table(*args, **kwargs):
-    """A :obj:`Table <rvapi.table.Table>` class"""
-    from rvapi.table import Table
+    """A :obj:`Table <.table.Table>` class"""
+    from .table import Table
     return Table(*args, **kwargs)
 
 
 def Tree(*args, **kwargs):
-    """A :obj:`Tree <rvapi.tree.Tree>` class"""
-    from rvapi.tree import Tree
+    """A :obj:`Tree <.tree.Tree>` class"""
+    from .tree import Tree
     return Tree(*args, **kwargs)
 

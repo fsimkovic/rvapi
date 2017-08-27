@@ -25,8 +25,8 @@ __date__ = "06 Jul 2017"
 
 import pyrvapi
 
-from rvapi.decorator import rvapi_flush
-from rvapi.entity import Entity
+from .decorator import rvapi_flush
+from .entity import Entity
 
 
 class Graph(Entity):

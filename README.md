@@ -3,8 +3,8 @@
 
 1. Creating a document
 ```python
-from rvapi import Document
-main = Document("GUI", "jsrview", "Main")
+from rvapi import GuiDocument
+main = GuiDocument("GUI", "jsrview", "Main")
 ```
 
 2. Create a tab

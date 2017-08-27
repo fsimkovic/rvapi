@@ -26,17 +26,17 @@ __date__ = "06 Jul 2017"
 import os
 import pyrvapi
 
-from rvapi.decorator import rvapi_flush
-from rvapi.entity import Entity 
+from .decorator import rvapi_flush
+from .entity import Entity 
 
 
-class Document(Entity):
+class GuiDocument(Entity):
     
     CCP4_ENV = os.environ["CCP4"]
     SHARE_JSRVIEW = os.path.join(CCP4_ENV, "share", "jsrview")
 
     def __init__(self, identifier, jsrview_dir, title, mode=1, layout=7, help_fname=None, html_fname=None, task_fname=None, webserver_uri=None):
-        super(Document, self).__init__(None)
+        super(GuiDocument, self).__init__(None)
         self._identifier = identifier
         self._title = title
         self._mode = mode
@@ -67,6 +67,16 @@ class Document(Entity):
         
         pyrvapi.rvapi_add_header(title)
         self.refresh()
+    
+    @rvapi_flush
+    def refresh(self):
+        pass
+
+
+class MockDocument(Entity):
+    
+    def __init__(self, *args, **kwargs):
+        super(MockDocument, self).__init__(None)
     
     @rvapi_flush
     def refresh(self):
