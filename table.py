@@ -66,3 +66,9 @@ class Table(Entity):
             pyrvapi.rvapi_put_table_string(identifier, e, self._nrows, j)
         self._nrows += 1
 
+    def edit_cell(self, i, j, content):
+        if i > self._nrows:
+            raise ValueError("Row index not defined in table")
+        identifier = self._identifier.split("/")[1]
+        pyrvapi.rvapi_put_table_string(identifier, str(content), i, j)
+
