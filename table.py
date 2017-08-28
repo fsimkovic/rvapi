@@ -31,13 +31,14 @@ from .entity import Entity
 
 class Table(Entity):
 
-    def __init__(self, parent, title, column_sort_index=None, opened=False):
+    def __init__(self, parent, title, column_sort_index=None, column_sort_order_reverse=False, opened=False):
         self._identifier = parent.identifier + "/" + self.unique_id("table")
         super(Table, self).__init__(parent)
 
         self._content = []
         self._opened = opened
         self._column_sort_index = column_sort_index 
+        self._column_sort_order_reverse = column_sort_order_reverse
         self._title = title
 
         pyrvapi.rvapi_add_table1(self._identifier, self._title, 1, 0, 1, 1, self._opened) 
@@ -53,6 +54,14 @@ class Table(Entity):
     @column_sort_index.setter
     def column_sort_index(self, column_sort_index):
         self._column_sort_index = column_sort_index
+
+    @property
+    def column_sort_order_reverse(self):
+        return self._column_sort_order_reverse
+
+    @column_sort_order_reverse.setter
+    def column_sort_order_reverse(self, column_sort_order_reverse):
+        self._column_sort_order_reverse = column_sort_order_reverse
 
     @rvapi_flush
     def add_col_header(self, header, description=None):
@@ -105,5 +114,5 @@ class Table(Entity):
     def _sort_content(self):
         if self._column_sort_index > len(self._content[0]):
             raise ValueError("Column sort index out of range")
-        self._content = sorted(self._content, key=lambda x: x[self._column_sort_index])
+        self._content = sorted(self._content, key=lambda x: x[self._column_sort_index], reverse=self._column_sort_order_reverse)
 
