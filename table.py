@@ -20,6 +20,24 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""
+Examples
+--------
+
+>>> from rvapi import *
+>>> n = GuiDocument("Main", "jsrview", "main")
+>>> tab = Tab(main, "something", opened=True)
+>>> table = Table(tab, "something", column_sort_index=2)
+>>> table.add_row(["hello", "world", 3])
+>>> table.insert_row(0, ["New", "row", 1])
+>>> table.insert_row(100, ["Something", "else", 2])
+>>> table.column_sort_index = 1
+>>> table.add_row(["This is", "another row"])
+>>> table.column_sort_order_reverse = True
+>>> table.add_row(["test", "test"])
+
+"""
+
 __author__ = "Felix Simkovic"
 __date__ = "06 Jul 2017"
 
