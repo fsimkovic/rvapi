@@ -85,13 +85,13 @@ class Table(Entity):
     def add_row(self, row):
         identifier = self._identifier.split("/")[1]
         self._content += [row]
-        self._update_table()
+        self._refresh_table()
 
     @rvapi_flush
     def insert_row(self, index, row):
         identifier = self._identifier.split("/")[1]
         self._content.insert(index, row)
-        self._update_table()
+        self._refresh_table()
 
     @rvapi_flush
     def edit_cell(self, i, j, content):
@@ -101,17 +101,17 @@ class Table(Entity):
             raise ValueError("Column index not defined in table")
         identifier = self._identifier.split("/")[1]
         self._content[i][j] = content
-        self._update_table()
+        self._refresh_table()
 
-    def _update_table(self):
+    def _refresh_table(self):
         identifier = self._identifier.split("/")[1]
         if self._column_sort_index:
-            self._sort_content()
+            self._sort_table_content_by_index()
         for i, row in enumerate(self._content):
             for j, cell_content in enumerate(row):
                 pyrvapi.rvapi_put_table_string(identifier, str(cell_content), i, j)
 
-    def _sort_content(self):
+    def _sort_table_content_by_index(self):
         if self._column_sort_index > len(self._content[0]):
             raise ValueError("Column sort index out of range")
         self._content = sorted(self._content, key=lambda x: x[self._column_sort_index], reverse=self._column_sort_order_reverse)
