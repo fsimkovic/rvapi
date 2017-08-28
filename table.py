@@ -31,15 +31,28 @@ from .entity import Entity
 
 class Table(Entity):
 
-    def __init__(self, parent, title, opened=False):
+    def __init__(self, parent, title, column_sort_index=None, opened=False):
         self._identifier = parent.identifier + "/" + self.unique_id("table")
         super(Table, self).__init__(parent)
 
-        self._nrows = 0
-        self._title = title
+        self._content = []
         self._opened = opened
+        self._column_sort_index = column_sort_index 
+        self._title = title
 
         pyrvapi.rvapi_add_table1(self._identifier, self._title, 1, 0, 1, 1, self._opened) 
+
+    @property
+    def nrows(self):
+        return len(self._content)
+
+    @property
+    def column_sort_index(self):
+        return self._column_sort_index
+
+    @column_sort_index.setter
+    def column_sort_index(self, column_sort_index):
+        self._column_sort_index = column_sort_index
 
     @rvapi_flush
     def add_col_header(self, header, description=None):
@@ -62,14 +75,35 @@ class Table(Entity):
     @rvapi_flush
     def add_row(self, row):
         identifier = self._identifier.split("/")[1]
-        for j, e in enumerate(row):
-            pyrvapi.rvapi_put_table_string(identifier, e, self._nrows, j)
-        self._nrows += 1
+        self._content += [row]
+        self._update_table()
+
+    @rvapi_flush
+    def insert_row(self, index, row):
+        identifier = self._identifier.split("/")[1]
+        self._content.insert(index, row)
+        self._update_table()
 
     @rvapi_flush
     def edit_cell(self, i, j, content):
-        if i > self._nrows:
+        if i > len(self._content):
             raise ValueError("Row index not defined in table")
+        elif j > len(self._content[i]):
+            raise ValueError("Column index not defined in table")
         identifier = self._identifier.split("/")[1]
-        pyrvapi.rvapi_put_table_string(identifier, str(content), i, j)
+        self._content[i][j] = content
+        self._update_table()
+
+    def _update_table(self):
+        identifier = self._identifier.split("/")[1]
+        if self._column_sort_index:
+            self._sort_content()
+        for i, row in enumerate(self._content):
+            for j, cell_content in enumerate(row):
+                pyrvapi.rvapi_put_table_string(identifier, str(cell_content), i, j)
+
+    def _sort_content(self):
+        if self._column_sort_index > len(self._content[0]):
+            raise ValueError("Column sort index out of range")
+        self._content = sorted(self._content, key=lambda x: x[self._column_sort_index])
 
