@@ -1,17 +1,17 @@
 # MIT License
-# 
+#
 # Copyright (c) 2017 Felix Simkovic
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A :obj:PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,8 +26,8 @@ Examples
 
 1. Creating a document
 
-   >>> from rvapi import GuiDocument
-   >>> main = GuiDocument("GUI", "jsrview", "Main")
+   >>> from rvapi import NewDocument
+   >>> main = NewDocument("GUI", "jsrview", "Main")
 
 2. Create a tab
 
@@ -130,10 +130,16 @@ def Data(*args, **kwargs):
     return Data(*args, **kwargs)
 
 
-def GuiDocument(*args, **kwargs):
-    """A :obj:`GuiDocument <.document.GuiDocument>` class"""
-    from .document import GuiDocument
-    return GuiDocument(*args, **kwargs)
+def NewDocument(*args, **kwargs):
+    """A :obj:`NewDocument <.document.NewDocument>` class"""
+    from .document import NewDocument
+    return NewDocument(*args, **kwargs)
+
+
+def ExistingDocument(*args, **kwargs):
+    """A :obj:`ExistingDocument <.document.ExistingDocument>` class"""
+    from .document import ExistingDocument
+    return ExistingDocument(*args, **kwargs)
 
 
 def MockDocument(*args, **kwargs):
@@ -194,4 +200,3 @@ def Tree(*args, **kwargs):
     """A :obj:`Tree <.tree.Tree>` class"""
     from .tree import Tree
     return Tree(*args, **kwargs)
-
