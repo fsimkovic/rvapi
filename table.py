@@ -1,17 +1,17 @@
 # MIT License
-# 
+#
 # Copyright (c) 2017 Felix Simkovic
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,7 +25,7 @@ Examples
 --------
 
 >>> from rvapi import *
->>> n = GuiDocument("Main", "jsrview", "main")
+>>> main = GuiDocument("Main", "jsrview", "main")
 >>> tab = Tab(main, "something", opened=True)
 >>> table = Table(tab, "something", column_sort_index=2)
 >>> table.add_row(["hello", "world", 3])
@@ -55,11 +55,12 @@ class Table(Entity):
 
         self._content = []
         self._opened = opened
-        self._column_sort_index = column_sort_index 
+        self._column_sort_index = column_sort_index
         self._column_sort_order_reverse = column_sort_order_reverse
         self._title = title
 
-        pyrvapi.rvapi_add_table1(self._identifier, self._title, 1, 0, 1, 1, self._opened) 
+        pyrvapi.rvapi_add_table1(self._identifier, self._title,
+                                 1, 0, 1, 1, self._opened)
 
     @property
     def nrows(self):
@@ -87,7 +88,7 @@ class Table(Entity):
             raise ValueError("Header and descriptions do not match in length")
         identifier = self._identifier.split("/")[1]
         for i, h in enumerate(header):
-            desc = description[i] if description else "" 
+            desc = description[i] if description else ""
             pyrvapi.rvapi_put_horz_theader(identifier, h, desc, i)
 
     @rvapi_flush
@@ -98,7 +99,7 @@ class Table(Entity):
         for j, h in enumerate(header):
             desc = description[i] if description else ""
             pyrvapi.rvapi_put_vert_theader(identifier, h, desc, j)
-    
+
     @rvapi_flush
     def add_row(self, row):
         identifier = self._identifier.split("/")[1]
@@ -127,10 +128,11 @@ class Table(Entity):
             self._sort_table_content_by_index()
         for i, row in enumerate(self._content):
             for j, cell_content in enumerate(row):
-                pyrvapi.rvapi_put_table_string(identifier, str(cell_content), i, j)
+                pyrvapi.rvapi_put_table_string(identifier, str(cell_content),
+                                               i, j)
 
     def _sort_table_content_by_index(self):
         if self._column_sort_index > len(self._content[0]):
             raise ValueError("Column sort index out of range")
-        self._content = sorted(self._content, key=lambda x: x[self._column_sort_index], reverse=self._column_sort_order_reverse)
-
+        self._content = sorted(self._content, key=lambda x: x[self._column_sort_index],
+                               reverse=self._column_sort_order_reverse)
