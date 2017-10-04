@@ -1,13 +1,13 @@
 ## Examples
 
-### Creating a document
+#### Creating a document
 
 ```python
 >>> from rvapi import NewDocument
 >>> main = NewDocument("GUI", "jsrview", "Main")
 ```
 
-### Create a tab
+#### Create a tab
 
 ```python
 >>> from rvapi import Tab
